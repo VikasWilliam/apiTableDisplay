@@ -1,25 +1,51 @@
-import logo from './logo.svg';
-import './App.css';
+import React,{useEffect,useState} from "react";
+import "./App.css";
+import UserData from "./UserData";
+const url="https://jsonplaceholder.typicode.com/users"
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+const App=()=>{
+
+  const [users,setUsers]=useState([]);
+
+  const fetchUser = async() =>{
+    try{
+      const res= await fetch(url);
+      const data=await res.json();
+      if(data.length>0){
+        setUsers(data);
+      }
+      console.log(data)
+        }catch(e){
+      console.error(e)
+    }
+  }
+
+  useEffect(()=>{
+    fetchUser()
+
+  },[])
+
+  return(
+    <div>
+      <h1>Api call in React with tabular display</h1>
+      <>
+      <table>
+        <thead>
+          <tr>
+          <th>Id</th>
+          <th>Name</th>
+          <th>Email</th> 
+          <th>Address</th>
+          </tr>
+          
+        </thead>
+        <tbody>
+          <UserData users={users} />
+        </tbody>
+      </table>
+      </>
     </div>
-  );
+  )
 }
 
 export default App;
