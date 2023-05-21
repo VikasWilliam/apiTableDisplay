@@ -1,0 +1,13 @@
+api used: https://jsonplaceholder.typicode.com/users
+
+need to call this APi and display in Tabluar format:
+step 1: To get Api data:
+        In App,js we will call the api using useEffect hook and add the sata in state variable
+
+step 2: call a fetchUser () in the useEffect, declare the variable api and initialize the api with url
+        
+step 3: we know that fetching api data returns promise hence to handle promise we will use async/await and try catch to get error
+        and to debug we will use console.error()
+
+step 4: Always remember we need to convert the data received into json.
+
