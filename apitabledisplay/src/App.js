@@ -6,13 +6,18 @@ const url="https://jsonplaceholder.typicode.com/users"
 const App=()=>{
 
   const [users,setUsers]=useState([]);
+  const [loading,setLoading]=useState(false);
 
   const fetchUser = async() =>{
     try{
       const res= await fetch(url);
       const data=await res.json();
       if(data.length>0){
-        setUsers(data);
+        setTimeout(()=>{
+          setLoading(true);
+          setUsers(data);
+        },3000)
+        
       }
       console.log(data)
         }catch(e){
@@ -39,9 +44,11 @@ const App=()=>{
           </tr>
           
         </thead>
+        {loading ?  
         <tbody>
           <UserData users={users} />
-        </tbody>
+        </tbody>:<div className="loading_css">Loading</div> }
+       
       </table>
       </>
     </div>
